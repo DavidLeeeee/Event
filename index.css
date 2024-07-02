@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+body {
+  background-color: #0e0e0e;
+  color: #fff;
+}
+#container {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Boxes */
+.outerBox {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  margin: 20px;
+}
+.middleBox {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 40px;
+}
+.innerBox1,
+.innerBox2 {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.outerBox,
+.middleBox,
+.innerBox1,
+.innerBox2 {
+  border-radius: 4px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.outer:hover {
+  transform: scale(1.02); /* 크기를 1.1배로 증가 */
+  transition: transform 0.3s ease; /* 부드럽게 애니메이션 적용 */
+}
+
+p {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+/* Console */
+#console {
+  width: 80%;
+  max-width: 600px;
+  margin-top: 20px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.console-header {
+  background-color: #333;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.console-header button {
+  background-color: #444;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.console-header button:hover {
+  background-color: #555;
+}
+
+.console-body {
+  padding: 10px;
+  min-height: 150px;
+  max-height: 150px;
+  overflow-y: auto;
+  font-family: monospace;
+  color: #b5b5b5;
+}
