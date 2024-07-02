@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  user-select: none;
+  /* user-select: none; */
 }
 body {
   background-color: #0e0e0e;
@@ -16,6 +16,11 @@ body {
 }
 
 /* Boxes */
+.rowBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .outerBox {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 40px;
@@ -51,6 +56,26 @@ p {
   position: absolute;
   top: 4px;
   left: 4px;
+}
+
+/* optionSetter */
+.option {
+  display: flex;
+  flex-direction: column;
+}
+#optionSetter {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#optionSetter .selectedBox {
+  margin-bottom: 10px;
+}
+
+#optionSetter .option button {
+  margin-right: 5px;
+  padding: 5px 10px;
 }
 
 /* Console */

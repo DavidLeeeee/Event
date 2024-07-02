@@ -8,26 +8,39 @@
   </head>
   <body>
     <section id="container">
-      <article id="bubbling">
-        <div class="outerBox">
-          <p>outerBox</p>
-          <div class="middleBox">
-            <p>middleBox</p>
-            <div class="innerBox1">
-              <p>innerBox1</p>
-            </div>
-            <div class="innerBox2">
-              <p>innerBox2</p>
+      <div class="rowBox">
+        <article id="bubbling">
+          <div class="outerBox">
+            <p>outerBox</p>
+            <div class="middleBox">
+              <p>middleBox</p>
+              <div class="innerBox1">
+                <p>innerBox1</p>
+              </div>
+              <div class="innerBox2">
+                <p>innerBox2</p>
+              </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article id="optionSetter">
-        <div class="selectedBox"></div>
-        <div class="option"></div>
-      </article>
-
+        <article id="optionSetter">
+          <div class="selectedBox">
+            '<span id="selectedBoxName">None</span>' is Selected
+          </div>
+          <div class="option">
+            <button onclick="addTimeout()">Set Timeout</button>
+            <button onclick="addStopPropagation()">
+              Add stopPropagation()
+            </button>
+            <button onclick="addStopImmediatePropagation()">
+              Add stopImmediatePropagation()
+            </button>
+            <button onclick="addPreventDefault()">Add preventDefault()</button>
+            <button onclick="toggleEventPhase()">Toggle(Bubble/Capture)</button>
+          </div>
+        </article>
+      </div>
       <article id="console">
         <div class="console-header">
           Console Output
