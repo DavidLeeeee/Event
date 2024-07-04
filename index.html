@@ -1,50 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./index.css" />
-  <title>이벤트 전파</title>
-  <script type="text/javascript" src="main.js"></script>
-</head>
-<body>
-  <section id="container">
-    <div class="rowBox">
-      <article id="bubbling">
-        <div class="outerBox">
-          <p>outerBox</p>
-          <div class="middleBox">
-            <p>middleBox</p>
-            <div class="innerBox1">
-              <p>innerBox1</p>
-            </div>
-            <div class="innerBox2">
-              <a href="http://google.com">google
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>이벤트 전파</title>
+    <script type="text/javascript" src="main.js"></script>
+  </head>
+  <body>
+    <section id="container">
+      <div class="rowBox">
+        <article id="bubbling">
+          <div class="outerBox">
+            <p>outerBox</p>
+            <div class="middleBox">
+              <p>middleBox</p>
+              <div class="innerBox1">
+                <p>innerBox1</p>
+              </div>
+              <div class="innerBox2">
                 <p>innerBox2</p>
-              </a>
+                <a href="http://google.com"
+                  ><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/768px-Google_Chrome_icon_%28February_2022%29.svg.png"
+                    alt="Google Chrome Icon"
+                    width="20"
+                  />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </article>
-      <article id="optionSetter">
-        <div class="selectedBox">
-          '<span id="selectedBoxName">None</span>' is Selected
-        </div>
-        <div class="option">
-          <button onclick="addStopPropagation()">stopPropagation()</button>
-          <button onclick="addStopImmediatePropagation()">stopImmediatePropagation()</button>
-          <button onclick="addPreventDefault()">preventDefault()</button>
-          <button onclick="toggleEventPhase()">Toggle(Bubble/Capture)</button>
-        </div>
-      </article>
-    </div>
-    <article id="console">
-      <div class="console-header">
-        Console Output
-        <button id="clear-button">비우기</button>
+        </article>
+        <article id="optionSetter">
+          <div class="selectedBox">
+            '<span id="selectedBoxName">None</span>' is Selected
+          </div>
+          <div class="option">
+            <button class="option-button" data-option="stopPropagation">
+              stopPropagation
+            </button>
+            <button
+              class="option-button"
+              data-option="stopImmediatePropagation"
+            >
+              stopImmediatePropagation
+            </button>
+            <button class="option-button" data-option="preventDefault">
+              preventDefault
+            </button>
+            <button class="option-button" data-option="toggleEventPhase">
+              Bubble/Capture
+            </button>
+          </div>
+        </article>
       </div>
-      <div class="console-body"></div>
-    </article>
-  </section>
-</body>
+      <article id="console">
+        <div class="console-header">
+          Console Output
+          <button id="clear-button">비우기</button>
+        </div>
+        <div class="console-body"></div>
+      </article>
+    </section>
+  </body>
 </html>
