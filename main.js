@@ -33,13 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function addEventToSelector(eventType, selector, handler) {
     const elements = document.querySelectorAll(selector);
     elements.forEach((element) => {
-      element.addEventListener(eventType, handler, captureMode); // Use the capture option
+      element.addEventListener(eventType, handler, captureMode);
+      // const isMiddleBox = element.classList.contains("outerBox");
+      // element.addEventListener(
+      //   eventType,
+      //   handler,
+      //   isMiddleBox ? true : captureMode
+      // );
     });
   }
+
   function removeEventFromSelector(eventType, selector, handler) {
     const elements = document.querySelectorAll(selector);
     elements.forEach((element) => {
-      element.removeEventListener(eventType, handler, captureMode); // Remove the event listener
+      element.removeEventListener(eventType, handler, captureMode);
     });
   }
 
@@ -57,7 +64,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (options.useStopPropagation) {
       event.stopPropagation();
     }
+    /*
+    if (className === "middleBox") {
+      setTimeout(() => {
+        const optionSelectedBoxName =
+          document.getElementById("selectedBoxName");
+        optionSelectedBoxName.textContent = optionSetterName;
 
+        updateConsole(`클릭됨: ${className}`);
+      }, 1000); // 1초 지연
+    } else {
+      const optionSelectedBoxName = document.getElementById("selectedBoxName");
+      optionSelectedBoxName.textContent = optionSetterName;
+
+      updateConsole(`클릭됨: ${className}`);
+    }
+    */
     const optionSelectedBoxName = document.getElementById("selectedBoxName");
     optionSelectedBoxName.textContent = optionSetterName;
 
@@ -133,6 +155,5 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
-
 
 // 가장 단순한 방법 : 클릭할 때, 맨 처음 ConsoleBody를 초기화
