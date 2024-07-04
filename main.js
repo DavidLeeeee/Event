@@ -1,29 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
   const boxOptions = {
     outerBox: {
-      useCapture: false,
-      useTimeout: false,
+      capture: false,
       useStopPropagation: false,
       useStopImmediatePropagation: false,
       usePreventDefault: false,
     },
     middleBox: {
-      useCapture: false,
-      useTimeout: false,
+      capture: false,
       useStopPropagation: false,
       useStopImmediatePropagation: false,
       usePreventDefault: false,
     },
     innerBox1: {
-      useCapture: false,
-      useTimeout: false,
+      capture: false,
       useStopPropagation: false,
       useStopImmediatePropagation: false,
       usePreventDefault: false,
     },
     innerBox2: {
-      useCapture: false,
-      useTimeout: false,
+      capture: false,
       useStopPropagation: false,
       useStopImmediatePropagation: false,
       usePreventDefault: false,
@@ -34,11 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function addEventListenerToSelector(selector, eventType, handler) {
     const elements = document.querySelectorAll(selector);
     elements.forEach((element) => {
-      element.addEventListener(eventType, handler);
+      element.addEventListener(eventType, handler, boxOptions[element.className].capture);  // Use the capture option
     });
   }
 
-  // 클릭 이벤트 핸들러
+  // Click Event Handler
   function handleClick(event) {
     const className = event.currentTarget.className;
     const options = boxOptions[className];
@@ -54,41 +50,56 @@ document.addEventListener("DOMContentLoaded", () => {
       event.stopPropagation();
     }
 
-    if (options.useTimeout) {
-      setTimeout(() => {
-        const optionSelectedBoxName =
-          document.getElementById("selectedBoxName");
-        optionSelectedBoxName.textContent = optionSetterName;
-      }, 1000);
-    } else {
-      const optionSelectedBoxName = document.getElementById("selectedBoxName");
-      optionSelectedBoxName.textContent = optionSetterName;
-    }
+    const optionSelectedBoxName = document.getElementById("selectedBoxName");
+    optionSelectedBoxName.textContent = optionSetterName;
 
     updateConsole(`클릭됨: ${className}`);
   }
 
-  // 콘솔 로그 업데이트
+  // Console Log Update
   function updateConsole(message) {
     const logEntry = document.createElement("div");
     logEntry.textContent = message;
     document.querySelector(".console-body").appendChild(logEntry);
   }
 
-  // 이벤트 리스너를 여러 박스에 추가
+  // Add Event Listener
   addEventListenerToSelector(
     ".outerBox, .middleBox, .innerBox1, .innerBox2",
     "click",
     handleClick
   );
 
-  // 클리어 버튼 이벤트 핸들러
+  // Console Empty
   const clearButton = document.getElementById("clear-button");
   clearButton.addEventListener("click", () => {
     document.querySelector(".console-body").textContent = "";
   });
 
-  // 옵션 버튼 이벤트 핸들러
+
+  // Remove event listeners function
+  function removeEventListenerFromSelector(selector, eventType, handler) {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((element) => {
+      element.removeEventListener(eventType, handler, boxOptions[element.className].capture);
+    });
+  }
+  // Reattach event listeners
+  function reattachEventListeners() {
+    removeEventListenerFromSelector(
+      ".outerBox, .middleBox, .innerBox1, .innerBox2",
+      "click",
+      handleClick
+    );
+    addEventListenerToSelector(
+      ".outerBox, .middleBox, .innerBox1, .innerBox2",
+      "click",
+      handleClick
+    );
+  }
+
+  
+  // Option Button Event Handler
   document
     .querySelectorAll(".outerBox, .middleBox, .innerBox1, .innerBox2")
     .forEach((element) => {
@@ -100,31 +111,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const optionName = button.textContent.trim();
             let optionValue;
             switch (optionName) {
-              case "Set Timeout":
-                boxOptions[selectedBox].useTimeout =
-                  !boxOptions[selectedBox].useTimeout;
-                optionValue = boxOptions[selectedBox].useTimeout;
-                break;
-              case "Add stopPropagation()":
+              case "stopPropagation()":
                 boxOptions[selectedBox].useStopPropagation =
                   !boxOptions[selectedBox].useStopPropagation;
                 optionValue = boxOptions[selectedBox].useStopPropagation;
                 break;
-              case "Add stopImmediatePropagation()":
+              case "stopImmediatePropagation()":
                 boxOptions[selectedBox].useStopImmediatePropagation =
                   !boxOptions[selectedBox].useStopImmediatePropagation;
-                optionValue =
-                  boxOptions[selectedBox].useStopImmediatePropagation;
+                optionValue = boxOptions[selectedBox].useStopImmediatePropagation;
                 break;
-              case "Add preventDefault()":
+              case "preventDefault()":
                 boxOptions[selectedBox].usePreventDefault =
                   !boxOptions[selectedBox].usePreventDefault;
                 optionValue = boxOptions[selectedBox].usePreventDefault;
                 break;
               case "Toggle(Bubble/Capture)":
-                boxOptions[selectedBox].useCapture =
-                  !boxOptions[selectedBox].useCapture;
-                optionValue = boxOptions[selectedBox].useCapture;
+                boxOptions[selectedBox].capture =
+                  !boxOptions[selectedBox].capture;
+                optionValue = boxOptions[selectedBox].capture;
+                reattachEventListeners();  
                 break;
             }
             updateConsole(
@@ -135,5 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
+
 
 // 가장 단순한 방법 : 클릭할 때, 맨 처음 ConsoleBody를 초기화
