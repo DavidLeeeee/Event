@@ -34,12 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const elements = document.querySelectorAll(selector);
     elements.forEach((element) => {
       element.addEventListener(eventType, handler, captureMode);
-      // const isMiddleBox = element.classList.contains("outerBox");
-      // element.addEventListener(
-      //   eventType,
-      //   handler,
-      //   isMiddleBox ? true : captureMode
-      // );
+
     });
   }
 
